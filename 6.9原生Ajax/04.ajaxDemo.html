@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ajax 接口调用示例</title>
+	<script type="text/javascript" src="jquery-3.0.0.min.js"></script>
+</head>
+<body>
+
+	<script type="text/javascript">
+		$(function () {
+			// 如果接口是news用下面的方法请求,并做数据解析
+			$.ajax({
+				url:"http://www.bugwhy.com/php/index/getNews.php",
+				data:{"type":"news"},
+				method:'post',
+				dataType:'json',
+				success:function(data) {
+					var arr = [];
+					for (var index in data.data.articles) {
+						var obj = data.data.articles[index];
+						arr.push(obj);
+					}
+
+				},
+				error:function(err) {
+					console.log(err);
+				}
+
+			})
+			// 其他接口,直接拿数据使用就行
+			$.ajax({
+				url:"http://www.bugwhy.com/php/index/getNews.php",
+				data:{"type":"html","shareViewPage":1},
+				method:'post',
+				dataType:'json',
+				success:function(data) {
+					console.log(data);
+					
+				},
+				error:function(err) {
+					console.log(err);
+				}
+
+			})
+
+
+		})
+	</script>
+	
+</body>
+</html>

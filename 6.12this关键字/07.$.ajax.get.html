@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>$.ajax的get请求</title>
+	<script type="text/javascript" src="jquery-3.0.0.min.js"></script>
+</head>
+<body>
+	
+	<button>点我啊!</button>
+
+	<script type="text/javascript">
+		
+	$(function () {
+		$('button').click(function () {
+			$.post("http://www.bugwhy.com/php/index/getNews.php", {type:'news'}, function (data) {
+				console.log(typeof(data));
+				 
+			},'json')
+		})
+	})
+
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>对象的constructor属性和prototype</title>
+</head>
+<body>
+
+	<script type="text/javascript">
+		// 对象的constructor属性
+		// 声明一个人的构造函数
+		function Person(name,age,bababa) {
+			this.name = name;
+			this.age = 19;
+			// this.prototype = {
+			// 	sing:function () {
+					
+			// 	},
+			// 	height:50
+			// }; // 假设prototype的显示
+		}
+
+		// 实例化一个对象(不允许使用中文做变量名)
+		// var 鹿晗 = new Person('小鹿');
+		// console.log(鹿晗.name);
+		var lu = new Person('小鹿');
+		console.log(lu.name);
+		console.log(lu.constructor);// Person
+		// 对象的constructor属性,指向该对象的构造函数.
+		// Person.prototype.sing = function () {
+		// 	console.log(this.name+'在唱歌');
+		// }
+		lu.constructor.prototype.sing = function () {
+			console.log(this.name+'在唱儿歌');
+		}
+		lu.sing();
+
+		var xin = new Person('张艺兴');
+		xin.sing();
+
+		// prototype属性
+		// 每个函数的prototype属性都指向了一个对象,这个对象的初始值是一个空对象(原型对象);
+		// 我们可以给这个空对象增加一些属性和方法,这对函数本身没有任何影响.因为函数只有作为构造器使用时,这些属性才起作用.
+		// 该函数实例化的所有对象,都会持有该prototype属性的引用,并可以将其当做自己的属性来使用.
+
+		// length属性.
+
+		// var obj = 'abcd';
+		// console.log(obj.length);
+
+		// 函数的length属性,用于记录该函数声明的时候所决定的参数数量.
+		console.log(Person.length);
+
+	</script>
+	
+</body>
+</html>

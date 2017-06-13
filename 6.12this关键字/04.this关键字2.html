@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+	// 声明一个狗的构造函数
+		function Dog (name,price){
+			this.name = name;
+			this.price = price;
+			this.dogInfo = function(){
+				console.log('名字:'+this.name+'价格:'+this.price);
+			}
+
+			var self = this;
+
+			this.run = function(){
+				setInterval(function(){
+					console.log(self.price+ '在跑步');
+				},1000)
+			} 
+		}
+
+		var myDog = new Dog('雪纳瑞','3000');
+		myDog.dogInfo();
+		myDog.run();
+	</script>
+</body>
+</html>

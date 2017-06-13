@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ajax 接口调用示例</title>
+	<script type="text/javascript" src="jquery-3.0.0.min.js"></script>
+</head>
+<body>
+
+	<script type="text/javascript">
+		$(function () {
+			
+			// 其他接口,直接拿数据使用就行
+			// function myLog(a){
+			// 	console.log(a);
+			// }
+
+			// 封装自己的ajax请求
+			function myAjax(url,parmas,callback){
+				$.ajax({
+					url:url,
+					data:parmas,
+					method:'post',
+					dataType:'json',
+					success:function(data) {
+						console.log(data);
+						callback(data); // myLog(data);
+					},
+					error:function(err) {
+						console.log(err);
+					}
+				})
+			}
+			// 调用一次
+			var msg = myAjax("http://www.bugwhy.com/php/index/getNews.php",{"type":"html","shareViewPage":1},function (a) {
+				console.log(a)
+			});
+			console.log(msg);
+
+			// jquery的callbck函数应用
+			// $.get(url, data, function () {
+				
+			// })
+
+
+		})
+	</script>
+	
+</body>
+</html>

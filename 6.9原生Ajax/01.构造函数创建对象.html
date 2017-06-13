@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>构造函数创建对象</title>
+</head>
+<body>
+
+	<script type="text/javascript">
+		
+		//声明一个构造函数 (为了更好区分,一般将构造函数的首字母大写)
+		function NetRed(name,age,sex,platform) {
+		 	// 声明属性
+		 	// this关键字代表实例化的对象(一般情况下)
+		 	this.name = name;
+		 	this.age = age;
+		 	this.sex = sex;
+		 	this.platform = platform;
+
+		 	this.getMoney = function () {
+		 		console.log('谢谢点亮!谢谢宝宝的豪华游轮');
+		 	}
+		} 
+		// 实例化一个对象
+		// 格式:var 对象名 =  new 构造方法(参数);
+		var papi = new NetRed('怕屁酱','19','男','爱奇艺');
+		// 访问对象的属性和方法
+			console.log(papi.name);  // 怕屁酱
+		var godRight = new NetRed('天佑','30','男','YY');
+			console.log(papi.name); 
+			godRight.getMoney();
+		// 给对象增加方法
+		papi.sing = function () {
+			console.log('papi在唱儿歌');
+		}
+		NetRed.prototype.sing = function () {
+			console.log(this.name+'在唱歌');
+		}
+		godRight.sing();
+		papi.sing()
+	</script>
+	
+</body>
+</html>

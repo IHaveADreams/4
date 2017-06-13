@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<button>按钮1</button>
+	<button>按钮2</button>
+	<button>按钮3</button>
+	<button>按钮4</button>
+	<button>按钮5</button>
+	
+	<script type="text/javascript">
+		var btns = document.querySelectorAll('button');
+		// for(var i = 0;i<btns.length;i++){
+		// 	var btn = btns[i];
+		// 	btn.onclick = function(){
+		// 		this.style.background = 'red';
+		// 	}
+		// }
+
+		// 拓展:单选按钮的解决方案:
+		// 方案一:
+		for(var i = 0;i<btns.length;i++){
+			var btn = btns[i];
+			btn.onclick = function(){
+				for(var i = 0;i<btns.length;i++){
+					btns[i].style.background = '';
+				}
+				this.style.background = 'red';
+			}
+		}
+		// 方案二:
+		for(var i = 0;i<btns.length;i++){
+			var btn = btns[i];
+			btn.onclick = function(){
+				for(var i = 0;i<btns.length;i++){
+					if (btns[i].style.background == 'red') { 
+						btns[i].style.background = '';
+					}
+				}
+				this.style.background = 'red';
+			}
+		}
+		// 方案三:
+		// 声明全局变量,来记录上一个选中的元素
+		var currentBtn = null;
+		for(var i = 0;i<btns.length;i++){
+			var btn = btns[i];
+			btn.onclick = function(){
+				if (currentBtn) {
+					currentBtn.style.background = '';
+				} 
+				this.style.background = 'red';
+				currentBtn = this;
+			}
+		}
+
+
+		// bug出现的原理
+		// // for循环的第一次
+		// var i = 0;
+		// 	var btn = btns[i];
+		// 	btn.onclick = function(){
+		// 		btn.style.background = 'red';
+		// 	}
+		// i++;	// 1
+
+		// // for循环的第二次
+		// 	var btn = btns[i];
+		// 	btn.onclick = function(){
+		// 		btn.style.background = 'red';
+		// 	}
+		// i++;	// 2
+
+		// // for循环的第三次
+		// 	var btn = btns[i];
+		// 	btn.onclick = function(){
+		// 		btn.style.background = 'red';
+		// 	}
+		// i++;	// 3
+
+		// // for循环的第四次
+		// 	var btn = btns[i];
+		// 	btn.onclick = function(){
+		// 		btn.style.background = 'red';
+		// 	}
+		// i++;	//4
+		// // for循环的第五次
+		// 	var btn = btns[i];
+		// 	btn.onclick = function(){
+		// 		btn.style.background = 'red';
+		// 	}
+		// i++;	// 5
+	</script>
+
+</body>
+</html>

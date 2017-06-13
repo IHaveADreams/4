@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>字面量创建对象</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		
+		// 字面量创建一个对象
+		var xuxu = {
+			name:'小旭旭',
+			age:'18',
+			sex:'不详',
+			Qfooter:function () {
+				console.log('扣大脚趾与二脚趾之间缝隙中的皮皮虾');
+			},
+			'Q noise':function () {
+				console.log('半截小拇指都进去了!');
+			}
+		}
+		// 对象的键名,一般不需要加引号,但是如下三种情况必须加引号:
+		//	1.键值中包含关键字或保留字的情况
+		//  2.键值中包含空格等特殊字符的情况
+		//  3.键值以数字开头的情况
+
+		// 调用对象的属性和方法
+		//	1.点语法(set/get)
+		//		当出现等号的时候,如果点语法出现在等号左侧,是赋值操作
+		// 		当出现等号的时候,如果点语法出现在等号右侧,是获取操作
+		// 		如果没有等号出现,使用点语法一般获取操作
+			console.log(xuxu.name); // 小旭旭
+		// 调用方法
+		// 函数其实也是一种数据,可以进行传递.
+			var  fun = xuxu.Qfooter;
+			fun();
+		//	2.访问属性
+		// 	obj['name'];
+			console.log(xuxu['age']);
+			xuxu['Qfooter']();
+		// 有些情况必须使用[]来访问对象或者方法
+			xuxu['Q noise']();	
+
+	
+		// 给对象增加一个属性或方法
+			xuxu.hight = '123cm';
+			xuxu.weight = '50kg';
+			xuxu.run = function () {
+				console.log('奔跑吧,姐妹!');
+				return xuxu.weight;
+			}
+		// 删除属性和方法
+			console.log(xuxu.hight);
+			delete xuxu.hight;
+			console.log(xuxu.hight);
+			delete xuxu.run;
+			console.log(xuxu.weight); // 50kg
+			xuxu.run();
+
+	</script>
+
+</body>
+</html>

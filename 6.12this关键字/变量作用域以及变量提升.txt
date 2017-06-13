@@ -1,0 +1,21 @@
+	题目一:
+	var a = 3; 
+	console.log(a); // 3 
+	function fun(){
+		console.log(a); // undefined 
+		var a = 4;
+		console.log(a);	// 4 
+	}
+	fun();
+	console.log(a); // 3 
+
+	题目二:
+	var a = 3; 
+	console.log(a); // 3 3 
+	function fun(){
+		console.log(a); // undefined 3
+		a = 4;
+		console.log(a);	// 4 4
+	}
+	fun();
+	console.log(a); // 4 4

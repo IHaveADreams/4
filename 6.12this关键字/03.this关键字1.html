@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>this关键字指向</title>
+</head>
+<body>
+
+
+	<script type="text/javascript">
+
+		// 声明一个简单的普通函数
+		// var a = 5;
+		// function fun() {
+		// 	var a = 3;
+		// 	console.log(this.a);// 5 this指向的是window
+		// }
+		// fun();
+
+
+		var a = 5;
+		function fun() {
+			this.a = 3;
+			console.log(this.a);
+		}
+		fun();
+
+	</script>
+
+</body>
+</html>

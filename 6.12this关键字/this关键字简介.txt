@@ -1,0 +1,132 @@
+一.this关键字简介
+	1.如果普通函数中有this关键字,那this指向window(谁调用该this关键字,this指向谁);
+	2.构造函数中的this指向实例化的对象;
+	3.计时器中的this关键字指向的是window;
+	4.在事件中调用this,this指向触发事件的元素.
+	5.call和apply可以改变this的指向
+二.callback回调函数.(增加内容)
+	function a(num1,num2,callback){
+		var sum = num1 + num2;
+		callback(sum);
+	}
+	function b(count){
+		console.log(count);
+	}
+	// 调用方法a
+	a(3,5,b);
+
+三.同源策略
+	1.什么是同源策略
+		->同源策略(Same Origin Policy)是一种约定,是浏览器最核心也是最基础的功能.是由Netscape提出的一种著名的安全策略.所谓的同源策略就是指域名,协议,端口都相同.
+		->现在所有的支持JavaScript的浏览器都会使用这个策略.
+		->如果少了同源策略,那么浏览器的正常功能可能会受到影响.可以这么说,web是构建在同源策略基础之上的.浏览器只是针对同源策略的一种实现.
+	2.域名
+		->顶级域名
+		->二级域名
+		->三级域名
+	3.协议
+		http(超文本传输协议)/https/file/ftp
+
+		http://www.bugwhy.com/a.html
+		http://www.bugwhy.com/b.json
+		->// a和b是同一域名,同一协议,同一端口 是同源
+
+		http://www.bugwhy.com/a.html
+		http://www.bugwhy.com/data/b.json	
+		->// a和b是同一域名,同一协议,同一端口 是同源
+
+		http://www.bugwhy.com/a.html
+		https://www.bugwhy.com/b.json
+		->// a和b是同一域名,不同协议,同一端口 不是同源,请求数据会引起跨域现象
+
+		http://www.bugwhy.com:8080/a.html
+		http://www.bugwhy.com/b.json
+		->// a和b是同一域名,同一协议,不同端口 不是同源,请求数据会引起跨域现象
+
+		http://www.bugwhy.com/a.html
+		http://60.205.31.97:80/b.json
+		->// a和b是同一域名,同一协议,同一端口 是同源
+
+	4.跨域
+		简单的说,从安全方面的考虑,页面中的JavaScript无法访问其他服务器上的数据,即同源策略一种现象.
+		跨域就是通过某些技术手段来绕过同源策略的限制,实现了不同服务器之间的通信效果.
+
+四.jQuery的ajax请求
+	1. $.get(url,param,success,dataType);
+		->url:请求地址
+		->param:传递的参数{num:12}
+		->success:响应函数(成功的回调函数)
+		->dataType:以什么方式处理返回数据(json/html/text/xml/script)
+		数据格式范例:
+			// json
+				{data:123};
+			// html
+				<html>
+				...
+				<p>123</p>
+				...
+				</html>
+			// text
+				123
+			// xml
+				<?xml version="1.0"?>
+				<rooter>
+				...
+				<p>123</p>
+				...
+				</rooter>
+			// script
+				callback(123);
+	2. $.post(url,param,success,dataType);
+		->url:请求地址
+		->param:传递的参数{num:12}
+		->success:响应函数(成功的回调函数)
+		->dataType:以什么方式处理返回数据(json/html/text/xml/script)
+	3. $.getJson(url,param,success);
+		->该方法完全等效于$.get(),仅仅是将dataType设置成了'json'
+	4. $('ele').load()
+		往目标元素之间插入请求内容
+	5. $.ajax()
+		该方法是全能的ajax实现,提供自定义的控件
+		$.ajax({
+			// 请求方式
+			type:'GET/POST',
+			// 请求地址
+			url:'abc.php',
+			// 参数
+			data:{num:1,type:2},
+			// 返回数据解析类型
+			dataType:'json',
+			// 成功的回调函数
+			success:function(data){
+				console.log(data);
+			},
+			// 失败的回调函数
+			error:function(err){
+				console.log(err);
+			},
+			// 是否发送异步请求
+			async:true
+		})
+	6. $.ajax()方法的使用场景
+		->你比较关心错误处理
+		->当你需要使用除了get和post请求之外的请求方式:
+			DELETE,PUT,PATCH,RESTFUL
+		->当你需要同步请求的时候.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>原生Ajax</title>
+</head>
+<body>
+	<div id="myDiv"></div>
+	<button id="myBtn">点我啊!</button>
+
+	<script type="text/javascript">
+		
+	// 获取按钮和显示窗口
+		var myBtn = document.getElementById('myBtn');
+		var myDiv = document.getElementById('myDiv');
+
+		myBtn.onclick = function () {
+			// 第一步,获取Ajax对象
+			var xhr = null; 
+			if (window.XMLHttpRequest) {
+				xhr = new XMLHttpRequest();
+			} else {
+				xhr = new ActiveXObject('Microsoft.XMLHTTP')
+			}
+			// 配置请求
+			if (xhr) {
+				// 创建请求
+				xhr.open('GET','data.txt',true);
+				// 设置回调函数
+				xhr.onreadystatechange = function () {
+					// 根据状态处理
+					if (xhr.readyState == 4 ) {
+						if (xhr.status == 200 || xhr.status== 304) {
+							myDiv.innerHTML = xhr.responseText;
+						} else {}
+					} else {}
+				}
+				xhr.send(null);
+			} else {
+				alert('您的网络开小差了,请重新刷新一次!');
+			}
+		}
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>模拟跨域请求</title>
+
+	<!-- <script type="text/javascript" src="http://172.18.4.62/bugwhy/deve/js/jq.js"></script> -->
+
+</head>
+<body>
+	<button>点我啊!</button>
+	<script type="text/javascript">
+		
+	// 声明一个方法用来接收数据
+	function getData(data) {
+		console.log('我拿到数据了,数据是:'+data);
+		script.remove();
+	}
+	// 获取按钮
+	var btn = document.getElementsByTagName('button')[0];
+	// 绑定点击事件
+	btn.onclick = function () {
+		// 动态创建script标签
+		var script = document.createElement('script');
+		var url = 'http://172.18.4.62/bugwhy/deve/js/data.js';
+		// 设置script标签的属性
+		script.setAttribute('src',url);
+		script.setAttribute('id','aaa');
+
+		// 把script标签加入head里面.
+		document.head.appendChild(script);
+	}
+
+	</script>
+	<!-- <script type="text/javascript" src="http://172.18.4.62/bugwhy/deve/js/data.js"></script> -->
+</body>
+</html>

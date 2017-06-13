@@ -1,0 +1,60 @@
+一.跨域的解决方案
+	错误的提示:
+		XMLHttpRquest cannot load 'http://www.bugwhy.com/php/index.php' NO 'Access-'
+	1.解决方案一:CORS(跨域资源共享，Cross-Origin Resource Sharing）)
+		->CORS原理：
+     	CORS定义一种跨域访问的机制，可以让AJAX实现跨域访问。然后呢,CORS允许一个域上的网络请求向另一个域提交跨域AJAX。
+     	->允许单个域名访问的写法:
+     		header('Access-Control-Allow-Origin:http://www.baidu.com');
+     	->允许所有的域名访问的写法
+     		header('Access-Control-Allow-Origin:*');
+
+    2.jsonp
+    	->什么是JSONP(json padding)是一种的json的使用方式,可用于解决主流的浏览器跨域数据访问的问题.
+    	->由于同源策略,数据请求被限制,但是HTML里<script>等标签是例外,不受同源策略影响.
+
+    	->jsonp底层实现原理
+    		// 声明一个方法用来接收数据
+			function getData(data) {
+				console.log('我拿到数据了,数据是:'+data);
+				script.remove();
+			}
+			// 获取按钮
+			var btn = document.getElementsByTagName('button')[0];
+			// 绑定点击事件
+			btn.onclick = function () {
+				// 动态创建script标签
+				var script = document.createElement('script');
+				var url = 'http://172.18.4.62/bugwhy/deve/js/data.js';
+				// 设置script标签的属性
+				script.setAttribute('src',url);
+				script.setAttribute('id','aaa');
+
+				// 把script标签加入head里面.
+				document.head.appendChild(script);
+			}
+		->jquery的jsonp实现
+			var url = 'http://bugwhy.com/ofo/1611/registjsonp.php';
+			$.ajax({
+				url:url,
+				type:'GET',// jsonp类型下的请求,只能用GET
+				data:{username:'张三',age:'14'},
+				dataType:'jsonp',// 指定为jsonp的数据类型
+				jsonp:'callback',//服务端获取回调函数名的key,
+				jsonCallback:'getName',// 回调函数名
+				success:function(data){
+					console.log(data);
+				},
+				error:function(err){
+					console.log(err);
+				}
+			})
+
+
+
+
+
+
+
+
+

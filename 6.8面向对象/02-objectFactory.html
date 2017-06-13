@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>工厂方法创建对象</title>
+</head>
+<body>
+	<script type="text/javascript">
+	
+		function ofoFactory(id,password,redPackage) {
+			
+			
+			return {
+				id:id,
+				password:password,
+				redPackage:redPackage || 0,
+				run:function () {
+					console.log('跑');
+				}
+			}
+		}
+		var arr = [];
+		for (var i = 0; i < 100; i++) {
+			if (i%2) {
+				var obj = ofoFactory(i+1,i*3/5+2);
+			} else {
+				var obj = ofoFactory(i+1,i*3/5+2,i*5/4-1);
+			}
+			
+			arr.push(obj);
+		}
+		for(var index in arr){
+			console.log('车号是:'+arr[index].id+'密码是'+arr[index].password+'红包是'+arr[index].redPackage);
+		}
+
+	</script>
+</body>
+</html>
