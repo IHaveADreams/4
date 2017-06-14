@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+// 声明一个颜色变量
+	$c1 : #FF44FF;
+	$c2 : #FFE66F;
+	$w1 : 500px;
+/*
+	sass的变量区分大小写
+*/
+	$C1 : red;
+div{
+	color:$c1;
+	border:1px solid $c2;
+	width:$w1;
+	p{
+		color:$c2;
+		&:hover{
+			color:purple;
+		}
+	}
+	span{
+		color:$C1;
+	}
+	&:hover{
+		color:black;
+	}
+}
+
+// 声明一个基础的样式
+@mixin base($w,$h:100px){
+	width:$w;
+	height:$h;
+	color:green;
+	border:1px solid red;
+}
+
+#div1{
+	@include base(100px);
+	font-size:20px;
+}
+#div2{
+	@include base(200px,200px);
+	font-size:30px;
+}
+#div3{
+	@include base(300px,300px);
+	font-size:40px;
+}

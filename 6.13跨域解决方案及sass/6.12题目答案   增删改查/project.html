@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+	<script type="text/javascript" src="jquery-3.0.0.min.js"></script>
+	<style type="text/css">
+		.alertDiv{
+			border: 1px solid red;
+			width: 400px;
+			background: white;
+			text-align: center;
+			position:absolute;
+			
+			left:50%;
+			margin-left:-200px;
+			top: 20px;
+			display: none;
+		}
+		#userindex{
+			display: none;
+		}
+		button{
+			border-radius: 4px;
+		}
+		button[id="delete"]{
+			background: red;
+		}
+		button[id="changeBtn"]{
+			background: cyan;
+		}
+	</style>
+</head>
+<body>
+	
+	<div class="content">
+		<table>
+			<thead>
+				<tr>
+					<th>序号</th>
+					<th>姓名</th>
+					<th>年龄</th>
+					<th>手机号</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<!-- 内容区域 -->
+			<tbody></tbody>
+		</table>
+		
+		<!-- 弹出框 -->
+		<div class="alertDiv">
+			<p id="userindex">序号: <input type="text"></p>
+			<p>姓名: <input type="text" id="username"></p>
+			<p>年龄: <input type="text" id="userage"></p>
+			<p>手机号: <input type="text" id="usertel"></p>
+			<p><button id="alertBtn">确定</button></p>
+		</div> 	
+
+		<button id="addRowBtn">新增记录</button>
+
+		<p>下面两行交换位置</p>
+		<p>
+			<input type="text" id="changeLeft">-<input type="text" id="changeRight">
+			<button id="changeBtn">交换</button>
+		</p>
+	</div>
+	<script type="text/javascript">
+		$(function () {
+			var arr = [
+				{name:'胡太',age:'19',tel:'15001200000'},
+				{name:'马二',age:'20',tel:'15001200111'},
+				{name:'张三',age:'21',tel:'15001200222'},
+				{name:'李四',age:'22',tel:'15001200333'},
+				{name:'王五',age:'23',tel:'15001200444'}
+			];
+
+
+			// 声明当前操作的对象下标
+			var currentObjIndex = null;
+			// 声明按钮操作类型
+			var btnType = null;
+
+			// 声明方法,用来刷新渲染页面
+			function refresh() {
+				// 首先清空
+				$('tbody').empty();
+				// 遍历创建
+				for (var i = 0; i < arr.length; i++) {
+					var obj = arr[i];
+					var str = '<tr>\
+									<td>'+(i+1)+'</td>\
+									<td>'+obj.name+'</td>\
+									<td>'+obj.age+'</td>\
+									<td>'+obj.tel+'</td>\
+									<td><button class="btns" id="add">新增</button><button class="btns" id="update">修改</button><button class="btns" id="delete">删除</button></td>\
+								</tr>';
+					$(str).appendTo($('tbody'));
+				}
+
+				// 绑定点击事件
+				$('.btns').click(function () {
+					// 获取操作按钮类型
+					btnType = $(this).attr('id');
+					// 获取操作按钮所在的行下标 并给全局变量赋值
+					currentObjIndex = $(this).parent().parent().index();
+					console.log(currentObjIndex);
+
+					if (btnType == 'add') {
+						// 显示输入框
+						$('.alertDiv').css('display','block');
+						// 增加
+						$('#username').val('');
+						$('#userage').val('');
+						$('#usertel').val('');
+					} else if(btnType == 'update') {
+						$('.alertDiv').css('display','block');
+						// 更新
+						$('#username').val(arr[currentObjIndex].name);
+						$('#userage').val(arr[currentObjIndex].age);
+						$('#usertel').val(arr[currentObjIndex].tel);
+					}else if(btnType == 'delete') {
+
+						var result = confirm('确定要删除第('+(currentObjIndex+1)+')吗?');
+						// 删除
+						if (result) {
+							arr.splice(currentObjIndex,1);
+							// 刷新页面
+							refresh();
+						} 
+						
+					}
+
+				})
+
+			}
+			refresh();
+			// 弹出窗口的确定按钮
+			$('#alertBtn').click(function () {
+				// 判断是新增的确定按钮还是更新的确定按钮
+				if (btnType == 'add') {
+					if ($('#username').val() && $('#userage').val() && $('#usertel').val()) {
+						// 创建新对象
+						var newObj = {};
+						
+						newObj.name = $('#username').val();
+						newObj.age = $('#userage').val();
+						newObj.tel = $('#usertel').val();
+						// 添加新对象
+						arr.splice(currentObjIndex+1,0,newObj);
+						// 刷新页面
+						refresh();
+					} else {
+						alert('所列内容不能为空!');
+					}
+				} else if(btnType == 'update') {
+					if ($('#username').val() && $('#userage').val() && $('#usertel').val()) {
+						console.log(currentObjIndex);
+
+						arr[currentObjIndex].name = $('#username').val();
+						arr[currentObjIndex].age = $('#userage').val();
+						arr[currentObjIndex].tel = $('#usertel').val();
+						// 刷新页面
+						refresh();
+					} else {
+						alert('所列内容不能为空!');
+					}
+				}else if(btnType == 'addRow'){
+					if ($('#username').val() && $('#userage').val() && $('#usertel').val() && $('#userindex input').val()) {
+						// 插入位置
+						var insertIndex = $('#userindex input').val();
+						if ( isNaN(parseInt(insertIndex)) ) {
+							alert('输入的序号不符合规则,请重新输入!');
+							return;
+						}
+						// 创建新对象
+						var newObj = {};
+						newObj.name = $('#username').val();
+						newObj.age = $('#userage').val();
+						newObj.tel = $('#usertel').val();
+						// 添加新对象
+						if (insertIndex > arr.length) {
+							// 如果输入序号大于数组长度,默认放到最后一位,即数组的最后面
+							insertIndex = arr.length
+						} else if(insertIndex <= 0){
+							// 如果小于零,则默认放到第一位
+							insertIndex = 0;
+						}else{
+							insertIndex -= 1;
+						}
+
+						arr.splice(insertIndex,0,newObj);
+						// 刷新页面
+						refresh();
+						// 隐藏输入框和序号input
+						$('#userindex').css('display','none');
+					} else {
+						alert('所列内容不能为空!');
+						$('#userindex').css('display','none');
+					}
+				}
+				// 隐藏输入框
+				$('.alertDiv').css('display','none');
+
+			})
+			// 新增记录的点击
+			$('#addRowBtn').click(function () {
+				// 显示序号的input
+				$('#userindex').css('display','block');
+				// 显示提示div
+				$('.alertDiv').css('display','block');
+				// 设置全局的按钮类型
+				btnType = 'addRow';
+				$('#userindex input').val('');
+				$('#username').val('');
+				$('#userage').val('');
+				$('#usertel').val('');
+			})
+
+			// 交换的btn逻辑
+			$('#changeBtn').click(function () {
+				if ($('#changeLeft').val() && $('#changeRight').val()) {
+					if (isNaN(parseInt($('#changeLeft').val())) || 
+						isNaN(parseInt($('#changeRight').val())) || 
+						$('#changeLeft').val() < 1 || 
+						$('#changeRight').val() < 1 || 
+						$('#changeRight').val() > arr.length || 
+						$('#changeLeft').val() > arr.length) {
+						alert('您输入的序号不存在,请重新输入!');
+						return;
+					} 
+
+					// 声明中间值
+					var temp = arr[$('#changeLeft').val() -1];
+					arr[$('#changeLeft').val() -1] = arr[$('#changeRight').val() -1];
+					arr[$('#changeRight').val() -1] = temp;
+					// 刷新页面
+					refresh();
+
+				} else {
+					alert('交换序号不可为空')
+				}
+			})
+		})
+	</script>
+</body>
+</html>

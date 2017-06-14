@@ -1,0 +1,77 @@
+一.预编译语言sass的入门
+	1.ruby环境的安装.
+		->命令行下输入 ruby -v 判断是否安装成功
+		->注意:安装的时候,一定要勾选utf8作为默认的编码格式.
+	2.安装sass
+		->命令行下输入
+			gem install sass
+		->命令行下输入 sass -v 判断是否安装成功
+	3.sass的概念
+		->sass是一个预处理器(css preprocessor).
+		->Sass是世界上最成熟稳定,功能强大的专业级CSS扩展语言.
+		->有两种文件后缀名:  .sass   .scss(主流的)
+	4.sass 基础语法
+		->注释方式
+			1). // :编译后不会出现在CSS文件中
+			2). /**/:编译后会出现在CSS文件中
+		->编译方式
+			1). 单文件的编译,命令行下输入
+				sass 源文件 输出文件
+			2). 单文件的watch命令监听编译,命令行下输入
+				sass --watch style.scss:style.css
+		->变量
+			sass允许使用者使用变量,所有的变量以$开头
+				// 声明一个颜色变量
+					$myColor:red;
+				// 使用这个变量
+					div{
+						color:$myColor;
+					}
+		->嵌套
+			跟html文档树形结构相类似
+				div{
+					color:red
+					p{
+						color:blue;
+					}
+					span{
+						color:yellow;
+					}
+				}			
+			注意: 获取自身的元素使用 & 符号:
+				div{
+					color:red;
+					&:hover{
+						color:green;
+					}
+				}
+		->Mixin
+			// 简单的说,Mixin就像js中的函数(方法)
+			// 声明一个@mixin命令,定义一个代码块
+				@mixin base(){
+					width:500px;
+					height:200px;
+					color:green;
+					border:1px solid red;
+				}		
+			// 使用@include命令,调用声明的@mixin方法
+				div{
+					@include base;
+				}
+
+
+
+
+
+
+扩展:
+	命令行下的常用命令 进入目标文件夹
+		cd c:text/
+	返回上一层文件夹
+		cd ../
+	退出当前的监听状态
+	 	两次 ctrl + c
+	自动补全
+		输入文件名,如果能确定唯一的时候,按tab后,系统会自动补全文件名
+	调取上一次使用过的命令 
+		↑

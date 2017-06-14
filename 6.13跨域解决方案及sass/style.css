@@ -1,0 +1,39 @@
+@charset "UTF-8";
+/*
+	sass的变量区分大小写
+*/
+div {
+  color: #FF44FF;
+  border: 1px solid #FFE66F;
+  width: 500px; }
+  div p {
+    color: #FFE66F; }
+    div p:hover {
+      color: purple; }
+  div span {
+    color: red; }
+  div:hover {
+    color: black; }
+
+#div1 {
+  width: 100px;
+  height: 100px;
+  color: green;
+  border: 1px solid red;
+  font-size: 20px; }
+
+#div2 {
+  width: 200px;
+  height: 200px;
+  color: green;
+  border: 1px solid red;
+  font-size: 30px; }
+
+#div3 {
+  width: 300px;
+  height: 300px;
+  color: green;
+  border: 1px solid red;
+  font-size: 40px; }
+
+/*# sourceMappingURL=style.css.map */
