@@ -1,0 +1,26 @@
+@for $i from 1 to 10 {
+	.div#{$i}{
+		color:blue;
+		border:1px solid red;
+		font-size:$i*10px;
+	}
+}
+
+@each $name in a,b,c,d{
+	.div#{$name}{
+		background:url("img/#{$name}.png");
+	}
+}
+
+@function myScale ($base,$n){
+	@return $base * $n;
+}
+// 声明一个基础的变量
+$w : 100px;
+// 调用函数
+@for $i from 1 to 10{
+	.div#{$i}{
+		width:myScale($w,$i);
+	}
+}
+

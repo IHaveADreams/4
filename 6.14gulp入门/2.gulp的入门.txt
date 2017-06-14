@@ -1,0 +1,81 @@
+一.gulp的入门
+	1.什么是gulp
+		gulp是一种前端自动化工具.(同类型的产品还有grunt/webpack);
+		->搭建web服务器
+		->文件保存时自动重载浏览器
+		->可以使用预处理器sass/less
+		->优化资源,比如压缩css,js,压缩图片
+	2.安装
+		->要安装nodejs(我们要使用的是nodejs下的npm包管理工具)
+		->验证nodejs是否安装成功
+			node -v
+		->验证npm是否存在
+			npm -v
+		->安装gulp	命令行下输入
+			npm install gulp -g
+			// -g表示全局安装 如果你是mac系统的话需要在命令最前面加上sudo获得管理员权限,命令如下:
+			sudo npm install gulp -g
+		->验证gulp是否安装成功
+			gulp -v
+	3.创建项目
+		->新建project文件夹(注意:不要使用中文名)
+		->进入文件夹,并在文件夹内打开cmd
+		->命令行下输入命令(或者npm init -y)
+			npm init
+		->局部安装gulp,在命令行下执行
+			npm install gulp --save-dev	
+			或者使用cnpm来安装
+			cnpm install gulp --save-dev
+		->创建gulpfile.js文件,用来作为gulp的入口文件,
+		->在gulpfile.js文件中编写任务代码	
+		->执行任务
+	4.项目文件目录
+		|- app/				// 开发环境
+			|-css/
+			|-images/
+			|-js/
+				|-a.js
+				|-b.js
+			|-index.html
+			|-scss/
+		|- dist/			// 生产环境
+			|-css/
+			|-images/
+			|-js/
+				|-a.js
+				|-b.js
+			|-index.html
+			|-scss/	
+		|- gulpfile.js 		// 构建工具入口文件
+		|- node_modules/	// node的依赖库
+		|- package.json		// 配置文件
+	5.使用gulp-sass来实现sass文件的编译
+		->安装gulp-sass插件,命令行下输入
+			npm install gulp-sass --save-dev
+		->在gulpfile.js中引入依赖
+			var sass = require('gulp-sass');
+		->配置任务
+			gulp.task('sass',function(){
+				return gulp.src('app/scss/style.scss')
+				.pipe(sass())	// 调用sass方法来编译
+				.pipe(gulp.dest('app/css'));
+			})
+		->执行任务,命令行下输入
+			gulp sass
+	6.通配符
+		通配符是一种匹配的模式,允许你匹配到多个文件,很多平台都在用,类似于正则表达式.
+		-> *.scss 		表示匹配当前目录下所有的 .scss 文件
+		-> **/*.scss 	表示匹配当前目录及其子目录下的所有的 .scss 文件
+		->	*.+(sass|scss) 表示匹配后缀是.sass与.scss的文件
+		-> !not-me.scss 表示移除匹配的文件,例如not-me.scss不会被匹配到.
+	7.使用Browser Sync 来实现页面的自动刷新
+		->安装browser-sync	命令行下输入
+			npm install browser-sync --save-dev
+			或者
+			cnpm install browser-sync --save-dev
+		->引入依赖
+			var browser = require('browser-sync');
+		->配置任务
+			
+
+

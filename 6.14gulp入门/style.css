@@ -1,0 +1,85 @@
+.div1 {
+  color: blue;
+  border: 1px solid red;
+  font-size: 10px; }
+
+.div2 {
+  color: blue;
+  border: 1px solid red;
+  font-size: 20px; }
+
+.div3 {
+  color: blue;
+  border: 1px solid red;
+  font-size: 30px; }
+
+.div4 {
+  color: blue;
+  border: 1px solid red;
+  font-size: 40px; }
+
+.div5 {
+  color: blue;
+  border: 1px solid red;
+  font-size: 50px; }
+
+.div6 {
+  color: blue;
+  border: 1px solid red;
+  font-size: 60px; }
+
+.div7 {
+  color: blue;
+  border: 1px solid red;
+  font-size: 70px; }
+
+.div8 {
+  color: blue;
+  border: 1px solid red;
+  font-size: 80px; }
+
+.div9 {
+  color: blue;
+  border: 1px solid red;
+  font-size: 90px; }
+
+.diva {
+  background: url("img/a.png"); }
+
+.divb {
+  background: url("img/b.png"); }
+
+.divc {
+  background: url("img/c.png"); }
+
+.divd {
+  background: url("img/d.png"); }
+
+.div1 {
+  width: 100px; }
+
+.div2 {
+  width: 200px; }
+
+.div3 {
+  width: 300px; }
+
+.div4 {
+  width: 400px; }
+
+.div5 {
+  width: 500px; }
+
+.div6 {
+  width: 600px; }
+
+.div7 {
+  width: 700px; }
+
+.div8 {
+  width: 800px; }
+
+.div9 {
+  width: 900px; }
+
+/*# sourceMappingURL=style.css.map */
