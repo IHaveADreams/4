@@ -1,0 +1,18 @@
+1.优化js和css文件
+	->优化,js的优化指的是拼接
+	->安装js拼接插件gulp-useref 命令行下输入
+		npm install gulp-useref --save-dev
+		或者
+		cnpm install gulp-useref --save-dev
+	->设置任务
+		// 创建js拼接任务
+		gulp.task('useref',function () {
+			return gulp.src('app/*.html')
+			.pipe(useref()) // html引入的js进行拼接
+			.pipe(gulp.dest('dist'))
+		})
+ 2.js文件的压缩(丑化)
+ 	->安装js压缩的插件gulp-uglify 命令行下输入
+ 		npm install gulp-uglify --save-dev
+ 		或
+ 		cnpm install gulp-uglify --save-dev
