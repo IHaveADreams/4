@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>在线聊天</title>
+	<!-- 第一步  安装Bmob -->
+	<script type="text/javascript" src="lib/bmob-min.js"></script>
+	<script type="text/javascript" src="lib/jquery-3.0.0.min.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript" src="lib/modernizr.custom.js"></script>
+	<script type="text/javascript" src="js/animation.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link rel="stylesheet" type="text/css" href="css/animations.css">
+</head>
+<body>
+
+	<div class="viewsWrap">
+		<!-- 新增数据页 -->
+		<div id="addData" class="pt-page">
+			<textarea id="uploadContent" cols="50" rows="20" ></textarea>
+			<p>
+				<select>
+					<option value="0">请选择表(api接口)</option>
+				</select>
+			</p>
+			<p>
+				<button id="addBtn">新增数据</button>
+				<button id="listBtn" onclick="changeView('#dataList')" >列表页</button>
+			</p>
+		</div>
+		<!-- 列表详情页 -->
+		<div id="dataList" class="pt-page">
+				<button  onclick="changeView('#addData')" >返回</button>
+			<table></table>
+		</div>
+	</div>
+
+</body>
+</html>

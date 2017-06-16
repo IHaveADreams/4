@@ -1,0 +1,73 @@
+一.git入门续
+	1.分支
+		->创建远程分支
+			1).打开项目
+			2).点击master下拉菜单
+			3).点击管理
+			4).新建分支
+			5).输入新建分支名(注意:最好远程分支与本地分支名字一致)
+			6).点击创建分支完成
+	2.本地与远程分支建立联系
+
+		->在当前分支下,推送后出现如下错误提示,则按提示键入命令
+			git push --set-upstream origin wsw
+		->另外,如果出现'git pull 'before git push,则先执行git pull,这个时候如果又出现如下错误提示
+			git branch --set-upstream to origin/<branch> wsw
+			则键入提示命令,注意,<bramch>不要写,示例命令如下
+			git branch --set-upstream to origin/wsw
+		->回车之后,先执行一次git pull之后再进行git push即可	
+
+二.日常工作
+	早上上班:
+	1.checkout到master分支
+	2.拉取远程master最新代码到本地的master上
+	3.赶紧切换到自己的分支上(wsw)
+	4.把本地最新的master代码合并到本地自己的分支上(git merge master)
+	中午工作:
+	5.开启一天的开发,在wsw这个分支上.
+	晚上下班:
+	6.把自己分支上写的代码推送到远程自己分支上去
+	7.checkout到master分支上
+	8.把今天写的代码合并(git merge wsw)到master上去
+	9.把本地的master推送到远程的master
+		->如果推送出错,可能是别人提交的新代码到远程master
+		->先pull远程的master,如果出现冲突,解决之
+		->push本地的master到远程.
+	10.一定一定要checkout回自己的wsw分支.
+
+
+
+	a.html里面的内容
+		<a href="b.html?id=a">跳转到b页面</a>
+			
+			window.open(url)
+			location.href = url
+
+
+	c.html里面的内容
+		<a href="b.html?id=c">跳转到b页面</a>
+
+	b.html里面的内容
+
+		js中的location.href 来获取?后面的参数
+			
+
+
+
+
+
+
+
+
+
+
+
+
+补充:	
+	添加项目成员
+		->打开项目
+		->点击管理
+		->项目成员管理
+		->点击所有(或者管理员)
+		->添加项目成员
+		->搜索添加

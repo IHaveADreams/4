@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>商家后台管理系统</title>
+	<script type="text/javascript" src="jquery-3.0.0.min.js"></script>
+	<script type="text/javascript" src="bmob/bmob-min.js"></script>
+</head>
+<body>
+	
+
+	<div>
+		<p>商品名:<input type="text"></p>
+		<p>价格:<input type="text"></p>
+		<p>数量:<input type="text"></p>
+		<p>评分:<input type="text"></p>
+		<p>图片链接:<input type="text"></p>
+	</div>
+	
+
+
+	<button id="add">新增一条数据</button>
+	<button id="get">获取一条数据</button>
+	<button id="getAll">获取所有数据</button>
+	<button id="showAll">展示所有数据</button>
+
+	<ul>
+		
+	</ul>
+
+	<script type="text/javascript">
+		// 初始化Bmob
+		Bmob.initialize("b79683a142e5948c8f8765f27fafac7a", "8ff617a4abb78626a70a17a83495424a");
+
+		// 声明游戏分数表
+		var Products = Bmob.Object.extend("Products");
+		// 实例化表
+	    var products = new Products();
+	    // 实例查询句柄
+	    var query = new Bmob.Query(Products);
+
+
+	    $('#add').click(function () {
+		    // 提交数据
+		    products.save({
+		    	name:$('input').eq(0).val(),
+		    	price:$('input').eq(1).val(),
+		    	num:$('input').eq(2).val(),
+		    	score:$('input').eq(3).val(),
+		    	imgUrl:$('input').eq(4).val()
+		    }, {
+		      success: function(object) {
+		        alert("create object success, object id:"+object.id);
+		      },
+		      error: function(model, error) {
+		        alert("create object fail");
+		      }
+		    });
+	    })
+	    
+	    // 获取一条数据
+	    $('#get').click(function () {
+	    	
+	    	query.get("3a7d2d828e", {
+		      success: function(object) {
+		        // The object was retrieved successfully.
+		        alert(object.get("score"));
+		      },
+		      error: function(object, error) {
+		        alert("query object fail");
+		      }
+		    });
+	    })
+	    // 获取所有数据
+	    function getAll(callback) {
+	    	// 查询所有数据
+			query.find({
+			  success: function(results) {
+			    callback(results);
+			  },
+			  error: function(error) {
+			    alert("查询失败: " + error.code + " " + error.message);
+			  }
+			});
+
+
+	    }
+
+	    $('#getAll').click(function () {
+	    	
+	    	getAll(function (results) {
+	    		console.log(results);
+	    	})
+	    });
+	    // 展示所有的数据
+	    $('#showAll').click(function () {
+	    	$('ul').empty();
+	    	getAll(function (data) {
+	    		// 遍历所有的数据
+	    		for (var i = 0; i < data.length; i++) {
+			      var object = data[i];
+			      $('<li>\
+			      		<span>'+object.get('name')+'</span>\
+			      		<span>'+object.get('price')+'</span>\
+			      		<span>'+object.get('num')+'</span>\
+			      		<span>'+object.get('score')+'</span>\
+						<img src='+object.get('imgUrl')+'>\
+			      	</li>').appendTo($('ul'));
+
+			    }
+	    	})
+	    })
+
+	</script>
+
+</body>
+</html>
