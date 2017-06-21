@@ -1,0 +1,73 @@
+一.node.js路由
+	获取请求的url和其他需要的get/post参数,随后根据这些数据来执行相应的代码--路由.	
+	1.搭建http服务
+		-> 注入http模块
+			var http = require('http');
+		-> 注入url模块
+			var url = require('url');
+		-> 配置服务
+			http.createServer(function(req,res){
+
+
+
+			}).listen(8888);
+
+		-> url路由的解析请求url中的参数
+					                               url.parse(string).query
+		                                           |
+		           url.parse(string).pathname      |
+		                       |                   |
+		                       |                   |
+		                     ------ -------------------
+		http://localhost:8888/start?foo=bar&hello=world
+		                                ---       -----
+		                                 |          |
+		                                 |          |
+		              querystring(string)["foo"]    |
+		                                            |
+		                         querystring(string)["hello"]
+
+二.express框架
+	1.Express 是一个基于node.js平台的非常简易,灵动的web应用开发框架.它提供了一系列强大的特性,快速搭建各种web和移动设备的应用.
+	2.安装
+		npm install express --save-dev (mac 系统需要sudo超级管理员权限,即在该命令最前面添加 sudo );
+	3.Express核心特性
+		->可以设置中间件来相应http请求
+		->定义了路由表来执行不同的http请求动作
+		->可以通过向模板(例如EJS)传递参数来动态渲染HTML页面.
+	4.安装以下几个重要的模块,配合express来使用
+		->body-parser:node.js的中间件,用来处理json,raw,text和url的编码数据.
+			npm install body-parser --save-dev
+		->cookie-parser:解析cookie的工具,通过request.cookies可以获取到客户端传递过来的cookie,并把它们转化成对象.
+			npm install cookie-parser --save-dev
+		->multer:node.js的中间件,用来处理enctype='multipart/form-data'(设置表单的MIME编码)的表单数据
+			npm install multer --save-dev
+三.express实例
+	// 注入express模块
+	var express = require('express');
+	// 实例化
+		var app = express();
+	// 客户机访问根目录
+		app.get('/',function (request,response) {
+			// 返回数据
+			// response.send('欢迎来的德玛西亚!');
+			// 返回一个登录页面  __dirname 表示服务文件所在的路径
+			response.sendfile( __dirname + '/index.html');
+		})
+		app.get('/login',function(request,response){
+			// 拿到用户名和密码
+			var username = request.query.username;
+			var password = request.query.password;
+			response.send('您输入的用户名是:'+username+'密码是:'+password);
+		})
+	// 创建服务
+		var server = app.listen(8888,function(){
+			console.log('服务已启动');
+		})
+
+	// 小练习:默认用户名是aaa,密码是123456
+		实现完整的登录模块,即,登录成功后.页面显示:恭喜你登录成功了,否则显示登录失败!
+
+
+三.快速搭建服务
+	
